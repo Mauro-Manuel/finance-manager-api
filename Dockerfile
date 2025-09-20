@@ -14,7 +14,7 @@ RUN ./mvnw clean package -DskipTests
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 
-COPY --from=build /app/target/*.jar app.jar
+COPY --from=build /app/target/*.jar moneymanager-v1.0.jar
 
-EXPOSE 9000
-ENTRYPOINT ["java", "-jar", "app.jar"]
+EXPOSE 9090
+ENTRYPOINT ["java", "-jar", "moneymanager-v1.0.jar"]
