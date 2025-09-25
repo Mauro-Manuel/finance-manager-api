@@ -24,24 +24,23 @@ public class NotificationService {
     @Value("${money.manager.frontend.url}")
     private String frontendUrl;
 
-
     //@Scheduled(cron = "0 * * * * *", zone = "Africa/Luanda")
     @Scheduled(cron = "0 0 22 * * *", zone = "Africa/Luanda")
     public void sendDailyIncomeExpenseReminder() {
         log.info("Job started: sendDailyIncomeExpenseReminder()");
         List<Profile> profiles = profileRepository.findAll();
         for(Profile profile : profiles) {
-            String body = "Hi " + profile.getFullName() + ",<br><br>"
-                    + "This is a friendly reminder to add your income and expenses for today in Money Manager.<br><br>"
-                    + "<a href="+frontendUrl+" style='display:inline-block;padding:10px 20px;background-color:#4CAF50;color:#fff;text-decoration:none;border-radius:5px;font-weight:bold;'>Go to Money Manager</a>"
-                    + "<br><br>Best regards,<br>Money Manager Team";
-            emailService.sendEmail(profile.getEmail(), "Daily reminder: Add your income and expenses", body);
+            String body = "Olá " + profile.getFullName() + ",<br><br>"
+                    + "Este é um lembrete amigável para adicionar as suas receitas e despesas de hoje no Finance Manager.<br><br>"
+                    + "<a href="+frontendUrl+" style='display:inline-block;padding:10px 20px;background-color:#4CAF50;color:#fff;text-decoration:none;border-radius:5px;font-weight:bold;'>Ir para o Finance Manager</a>"
+                    + "<br><br>Com os melhores cumprimentos,<br>Mauro Manuel e Team";
+            emailService.sendEmail(profile.getEmail(), "Lembrete diário: Adicione as suas receitas e despesas", body);
         }
         log.info("Job completed: sendDailyIncomeExpenseReminder()");
     }
 
     @Scheduled(cron = "0 0 23 * * *", zone = "Africa/Luanda")
-   //@Scheduled(cron = "0 * * * * *", zone = "Africa/Luanda")
+    //@Scheduled(cron = "0 * * * * *", zone = "Africa/Luanda")
     public void sendDailyExpenseSummary() {
         log.info("Job started: sendDailyExpenseSummary()");
         List<Profile> profiles = profileRepository.findAll();
@@ -50,7 +49,7 @@ public class NotificationService {
             if (!todaysExpenses.isEmpty()) {
                 StringBuilder table = new StringBuilder();
                 table.append("<table style='border-collapse:collapse;width:100%;'>");
-                table.append("<tr style='background-color:#f2f2f2;'><th style='border:1px solid #ddd;padding:8px;'>S.No</th><th style='border:1px solid #ddd;padding:8px;'>Name</th><th style='border:1px solid #ddd;padding:8px;'>Amount</th><th style='border:1px solid #ddd;padding:8px;'>Category</th></tr>");
+                table.append("<tr style='background-color:#f2f2f2;'><th style='border:1px solid #ddd;padding:8px;'>Nº</th><th style='border:1px solid #ddd;padding:8px;'>Nome</th><th style='border:1px solid #ddd;padding:8px;'>Valor</th><th style='border:1px solid #ddd;padding:8px;'>Categoria</th></tr>");
                 int i = 1;
                 for(ExpenseDTO expense : todaysExpenses) {
                     table.append("<tr>");
@@ -61,8 +60,8 @@ public class NotificationService {
                     table.append("</tr>");
                 }
                 table.append("</table>");
-                String body = "Hi "+profile.getFullName()+",<br/><br/> Here is a summary of your expenses for today:<br/><br/>"+table+"<br/><br/>Best regards,<br/>Money Manager Team";
-                emailService.sendEmail(profile.getEmail(), "Your daily Expense summary", body);
+                String body = "Olá "+profile.getFullName()+",<br/><br/> Aqui está um resumo das suas despesas de hoje:<br/><br/>"+table+"<br/><br/>Com os melhores cumprimentos,<br/>Mauro Manuel e Team";
+                emailService.sendEmail(profile.getEmail(), "Resumo diário das suas despesas", body);
             }
         }
         log.info("Job completed: sendDailyExpenseSummary()");

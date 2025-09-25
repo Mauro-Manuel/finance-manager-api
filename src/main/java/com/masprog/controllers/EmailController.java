@@ -31,8 +31,8 @@ public class EmailController {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         excelService.writeIncomesToExcel(baos, incomeService.getCurrentMonthIncomesForCurrentUser());
         emailService.sendEmailWithAttachment(profile.getEmail(),
-                "Your Income Excel Report",
-                "Please find attached your income report",
+                "O seu Relatório de Receitas em Excel",
+                "Segue em anexo o seu relatório de receitas",
                 baos.toByteArray(),
                 "income.xlsx");
         return ResponseEntity.ok(null);
@@ -45,8 +45,8 @@ public class EmailController {
         excelService.writeExpensesToExcel(baos, expenseService.getCurrentMonthExpensesForCurrentUser());
         emailService.sendEmailWithAttachment(
                 profile.getEmail(),
-                "Your Expense Excel Report",
-                "Please find attached your expense report.",
+                "O seu Relatório de Despesas em Excel",
+                "Segue em anexo o seu relatório de despesas.",
                 baos.toByteArray(),
                 "expenses.xlsx");
         return ResponseEntity.ok(null);
