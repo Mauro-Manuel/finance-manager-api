@@ -48,6 +48,7 @@ public class ProfileService {
                .fullName(profileDTO.getFullName())
                .email(profileDTO.getEmail())
                .password(passwordEncoder.encode(profileDTO.getPassword()))
+               .contact(profileDTO.getContact())
                .profileImageUrl(profileDTO.getProfileImageUrl())
                .build();
     }
@@ -57,6 +58,7 @@ public class ProfileService {
                 .id(profile.getId())
                 .fullName(profile.getFullName())
                 .email(profile.getEmail())
+                .contact(profile.getContact())
                 .profileImageUrl(profile.getProfileImageUrl())
                 .createdAt(profile.getCreatedAt())
                 .updatedAt(profile.getUpdatedAt())

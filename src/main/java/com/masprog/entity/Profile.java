@@ -26,6 +26,7 @@ public class Profile {
     @Column(unique = true)
     private String email;
     private String password;
+    private String contact;
     private String profileImageUrl;
 
     @Column(updatable = false)
