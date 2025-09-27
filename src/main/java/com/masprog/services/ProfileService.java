@@ -2,6 +2,7 @@ package com.masprog.services;
 
 import com.masprog.dto.AuthDTO;
 import com.masprog.dto.ProfileDTO;
+import com.masprog.dto.OmbalaSmsResponseDTO;
 import com.masprog.entity.Profile;
 import com.masprog.repositories.ProfileRepository;
 import com.masprog.utils.JwtUtil;
@@ -14,9 +15,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Mono;
 
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -26,6 +30,8 @@ public class ProfileService {
     private final EmailService emailService;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
+    private final OmbalaSmsClient wizaService;
+
     private final JwtUtil jwtUtil;
     @Value("${app.activation.url}")
     private String activationURL;
@@ -119,4 +125,7 @@ public class ProfileService {
             throw new RuntimeException("Invalid email or password");
         }
     }
+
+
+
 }
